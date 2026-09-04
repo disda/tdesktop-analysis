@@ -1,6 +1,6 @@
 # 08 · 消息列表数据模型与加载 / 分页
 
-> 承接 [`07-history-structure-entry.md`](07-history-structure-entry.md)。材料：`history/history.h`、`history/history_item.h`、`data/data_histories.h`、`data/data_history_messages.h`、`storage/storage_sparse_ids_list.h`、`history/history_widget.h`、`history/view/history_view_list_widget.h`。**未**全量克隆；MTP 方法名以调用链可见处为准，完整 TL 分支标为推测。
+> 承接 [`07-history-structure-entry.md`](07-history-structure-entry.md)。材料：同上头文件 + sparse 核对 `history_widget.cpp` / `history.cpp` / `data_messages.h`。**未**全量克隆整仓。
 
 消息列表的「数据」分两层：**实体**（`History` / `HistoryItem`）与 **可查询切片**（`Storage::SparseIdsList` → `Data::HistoryMessages` → `MessagesSlice`）。UI 翻页 = 在缺口处向服务器要一段连续 id 区间，再 `addOlderSlice` / `addNewerSlice` 灌进 blocks，或让 `ListWidget` 订阅 `HistoryViewer` 产出的 slice。
 
@@ -80,7 +80,18 @@ flowchart LR
   H -->|blocks| HI[HistoryInner]
 ```
 
-> **推测**：具体 TL 调用多为 `messages.getHistory`（及 topic/scheduled 变体）；实现落在 `HistoryWidget` cpp 与 `apiwrap` / `Histories` 请求生成器中，本文未逐行对照 `.cpp`。
+### 已核对：`firstLoadMessages`（`history_widget.cpp`）
+
+| 常量 | 值 |
+|---|---|
+| `kMessagesPerPageFirst` | **30**（贴底首包等） |
+| `kMessagesPerPage` | **50** |
+| `kPreloadHeightsCount` | **3**（距边缘约 3 屏触发预载，见 09） |
+
+- 按 `_showAtMsgId`（Unread / End / 具体 id / migrated 负 id）选 `from`、`offsetId`、`offset`（around 时常 `-loadCount/2`）。
+- `Data::Histories::sendRequest(..., RequestType::History, …)` 内发 **`MTPmessages_GetHistory`**；done → `messagesReceived` → `addOlderSlice` / `addNewerSlice`。
+- 空 older slice → `_loadedAtTop = true`；空 newer → `_loadedAtBottom = true`。
+- 向上灌入走 `startBuildingFrontBlock` / `finishBuildingFrontBlock`（避免只往 last block 追加）。
 
 ## 加载闸门（HistoryWidget）
 
@@ -109,7 +120,7 @@ sequenceDiagram
   participant SIM as SparseIdsList
 
   HW->>HH: sendRequest(History, generator)
-  HH->>MTP: messages.getHistory…（推测）
+  HH->>MTP: MTPmessages_GetHistory
   MTP-->>HH: messages / slice
   HH-->>HW: finish callback
   HW->>H: addOlderSlice / addNewerSlice

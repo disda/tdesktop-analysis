@@ -1,0 +1,3 @@
+
+# local upstream sparse checkout / raw cache (do not push)
+.cache/

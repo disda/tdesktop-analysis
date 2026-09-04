@@ -117,6 +117,14 @@ sequenceDiagram
 - `atNewestEdge()`：是否贴最新。
 - Corner buttons（`HistoryView::CornerButtons`）委托给 `HistoryWidget` / Chat 宿主，驱动未读/提到/向下箭头（07 已列宿主）。
 
+## 视口更新副作用（已核对 `HistoryInner::visibleAreaUpdated`）
+
+1. 若 `hasPendingResizedItems()` → **不写** `scrollTopItem`（防半布局锚点）。
+2. 贴底 → `forgetScrollState()`；否则 `countScrollState(top - segmentTop)`（`_history` 或 `_migrated`）。
+3. userpics：`size > kClearUserpicsAfter`（**50**）→ 移入 `_userpicsCache`。
+4. heavy：`unloadHeavyViewParts(delegate, top - 2*page, bottom + 2*page)`，`kUnloadHeavyPartsPages = 2`（详见 10）。
+5. `paintEvent` 若 `contentOverlapped` 或 `hasPendingResizedItems` → **直接 return**（与 Dialogs 同哲学）。
+
 ## 几何与 ElasticScroll
 
 - `HistoryWidget::setGeometryWithTopMoved(rect, topDelta)`：顶边移动时把 delta **加进 scroll**，避免内容视觉跳动（头注释明确）。

@@ -1,6 +1,6 @@
 # 07 · 消息列表结构与 widget 树（打开会话 → 第一帧）
 
-> 基于 `dev` 分支 Contents / raw 头文件：`history/history_widget.h`、`history/history_inner_widget.h`、`history/view/history_view_list_widget.h`、`history/view/history_view_chat_section.h`、`history/history.h`、`mainwidget.h`（见 04 章）。**未**全量克隆。推测处已标注。
+> 基于 `dev`：对 `Telegram/SourceFiles/history` + `data` **shallow sparse checkout** 核对；并辅以 raw 头文件。**未**全量克隆整仓。推测处已标注。
 
 打开左侧会话行后，右侧中栏并不是一个 `QListView`，而是 **自绘消息流**：`HistoryWidget`（主会话中栏）或 `HistoryView::ChatWidget`（分栏/专题等 `Section`）托管 `Ui::ElasticScroll`，再挂 `HistoryInner` 或 `HistoryView::ListWidget`。第一帧的目标是：**尽快画出「锚点附近」已有的 `HistoryItem` 视图**，缺数据再异步补页（见 08）。
 
@@ -97,8 +97,9 @@ sequenceDiagram
 
 1. **`History::isReadyFor(MsgId)` / `getReadyFor(MsgId)`**：本地 `blocks` 是否已覆盖目标锚点；不够则拉片（08）。
 2. **锚点默认**：`History::showAtMsgId` 常为 `ShowAtUnreadMsgId`；底部则 `scrollTopItem == nullptr`（头注释：在底部时 offset 无定义）。
-3. **双 History**：`HistoryWidget` 可同时持有 `_history` 与 `_migrated`（群升级超级群前的旧会话），Inner 需跨两条时间线拼视口（**推测**：绘制枚举时拼接 migrated + current）。
-4. **合成滚动状态（经典路径）**：`History` 公开字段 `scrollTopItem` + `scrollTopOffset`；注释写明 `scrollTop = top(scrollTopItem) + scrollTopOffset`。ListWidget 路径改用 `listScrollTopItemId` / `listScrollTopItemDate` / `listScrollTopShift`（同一头文件注释：新 ListWidget 不再填满 blocks 式 `scrollTopItem`）。
+3. **双 History**：`HistoryWidget` 可同时持有 `_history` 与 `_migrated`（群升级超级群前的旧会话），Inner 经 `migratedTop()` / `historyTop()` 把两段拼进同一滚动内容（已核对）。
+4. **换 peer 时重建 list（已核对 cpp）**：`_scroll->takeWidget<HistoryInner>().destroy()` 后 `_list = _scroll->setOwnedWidget(object_ptr<HistoryInner>(this, _scroll, controller(), _history))`；旧 history 经 `setHistory` → `unloadHeavyViewParts(delegate)`（见 10）。
+5. **合成滚动状态（经典路径）**：`History` 公开字段 `scrollTopItem` + `scrollTopOffset`；注释写明 `scrollTop = top(scrollTopItem) + scrollTopOffset`。ListWidget 路径改用 `listScrollTopItemId` / `listScrollTopItemDate` / `listScrollTopShift`（同一头文件注释：新 ListWidget 不再填满 blocks 式 `scrollTopItem`）。
 
 ## Element 树（第一帧实际画什么）
 

@@ -1,8 +1,10 @@
 # 系列后续章节
 
-> 已完成章节见「已完成」；其余为标题 stubs，顺序可按研究需要调整。
+> 已完成章节见「已完成」；其余为标题 stubs。
 >
-> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–06 下钻，随后 **07–11 消息列表**。导读为独立文档，各章正文不再重复置顶块。
+> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–11 下钻。导读为独立文档，各章正文不再重复置顶块。
+>
+> **HistoryView 分集速览**：[docs/history-SERIES.md](docs/history-SERIES.md)
 
 ## 已完成
 
@@ -16,17 +18,13 @@
 | 04 | 会话列表 / Dialogs / Chat List：UI、数据模型与更新路径 | [`docs/04-dialogs-chat-list.md`](docs/04-dialogs-chat-list.md) |
 | 05 | Dialogs 深潜：实现、内存、滚动/重绘与相关测试面 | [`docs/05-dialogs-impl-memory-perf.md`](docs/05-dialogs-impl-memory-perf.md) |
 | 06 | 横切：内存所有权、测试体系与卡顿（jank）治理 | [`docs/06-memory-testing-jank.md`](docs/06-memory-testing-jank.md) |
-| 07 | 消息列表结构与 widget 树：`HistoryWidget` / `HistoryInner` / `ListWidget` | [`docs/07-history-structure-entry.md`](docs/07-history-structure-entry.md) |
-| 08 | 消息列表数据模型与加载/分页：SparseIds、切片、MTP 翻页 | [`docs/08-history-data-pagination.md`](docs/08-history-data-pagination.md) |
-| 09 | 消息列表绘制/布局虚拟化与滚动锚点 | [`docs/09-history-layout-virtualization.md`](docs/09-history-layout-virtualization.md) |
-| 10 | 消息列表行内内存与媒体：Element / Media / keepAlive / unload | [`docs/10-history-media-memory.md`](docs/10-history-media-memory.md) |
-| 11 | 消息列表更新/动画/卡顿：增量、揭示动画、对照 Dialogs 缓存 | [`docs/11-history-updates-jank.md`](docs/11-history-updates-jank.md) |
-
-消息列表分册索引：[`docs/history-SERIES.md`](docs/history-SERIES.md)。
+| 07 | 消息列表结构与入口：打开会话 → `HistoryWidget` / `HistoryInner` 首帧 | [`docs/07-history-structure-entry.md`](docs/07-history-structure-entry.md) |
+| 08 | 消息列表数据与分页：`History` / Item、向上加载、Gap、MTP | [`docs/08-history-data-pagination.md`](docs/08-history-data-pagination.md) |
+| 09 | 消息列表布局虚拟化与滚动锚点 | [`docs/09-history-layout-virtualization.md`](docs/09-history-layout-virtualization.md) |
+| 10 | 消息列表行内媒体与内存：Media、keepAlive、unload | [`docs/10-history-media-memory.md`](docs/10-history-media-memory.md) |
+| 11 | 消息列表更新 / 动画 / 卡顿与 Dialogs 缓存对比 | [`docs/11-history-updates-jank.md`](docs/11-history-updates-jank.md) |
 
 ## 拟定后续（stubs）
-
-### 其他后续
 
 | 编号 | 拟定标题 |
 |---:|---|
@@ -44,6 +42,6 @@
 | 23 | 贡献与工程实践：Issues、Actions、分支策略（`dev` vs `master`） |
 | 24 | 附录：术语表、API 凭证自建注意、许可证合规检查清单 |
 
-导读「下一步」在 **07–11（消息列表 / HistoryView）已完成后**，优先对齐 stub **16（storage eviction）**，其次 **14（PTS/Updates）** / **18（媒体管线）**。
+导读「下一步」在 **07–11（HistoryView）** 完成后，优先 **16（storage eviction）**、**18（媒体管线）**。
 
 （完）

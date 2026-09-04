@@ -1,12 +1,14 @@
 # Telegram Desktop（tdesktop）源码分析系列
 
-面向 Mike 的 **文档导向** 分析包：基于 GitHub 公开 API / raw 内容整理，**未完整克隆** `telegramdesktop/tdesktop` 仓库树。
+面向 Mike 的 **文档导向** 分析包：基于 GitHub 公开 API / raw 内容整理；HistoryView 章节对 `history/` + `data/` 做了浅克隆核对。**未**完整克隆整棵 `telegramdesktop/tdesktop` 仓库树。
 
 ## 先读这个：为什么实现得牛
 
 **推荐首读** → [`docs/00-why-it-nails-it.md`](docs/00-why-it-nails-it.md)
 
-用产品约束（超长会话列表、实时 MTProto、跨平台、流体 UI）串起本系列已核实的机制：多 `MainList` 数据面、滚动行缓存与 freeze、Instance/会话线程、TL codegen、自研 `lib_ui`、以及「薄测试 / 厚所有权」的取舍。读完再按章节下钻；文末有 HistoryView / storage eviction 等下一步。
+用产品约束（超长会话列表、实时 MTProto、跨平台、流体 UI）串起本系列已核实的机制：多 `MainList` 数据面、滚动行缓存与 freeze、Instance/会话线程、TL codegen、自研 `lib_ui`、以及「薄测试 / 厚所有权」的取舍。读完再按章节下钻。
+
+**消息列表分集** → [`docs/history-SERIES.md`](docs/history-SERIES.md)（07–11）
 
 ## 上游
 
@@ -21,7 +23,7 @@
 | Stars / Forks | `32825` / `7172`（瞬时值，会变） |
 | 最新已发布 tag（API `releases`） | `v7.1.5`（`2026-09-02T19:49:05Z`） |
 
-> 说明：`dev` 分支上的 `changelog.txt` 可能领先于 GitHub Releases（例如 changelog 已出现 `7.2.x`，而 Releases 列表当时最新为 `v7.1.5`）。以 Releases/tag 为准核对「已发布」；changelog 作功能叙述补充。
+> 说明：`dev` 分支上的 `changelog.txt` 可能领先于 GitHub Releases。以 Releases/tag 为准核对「已发布」；changelog 作功能叙述补充。
 
 ## 推荐阅读顺序
 
@@ -33,13 +35,13 @@
 5. [`docs/04-dialogs-chat-list.md`](docs/04-dialogs-chat-list.md) — 会话列表（Dialogs / Chat List）UI 与数据路径  
 6. [`docs/05-dialogs-impl-memory-perf.md`](docs/05-dialogs-impl-memory-perf.md) — Dialogs 深潜：实现、内存、滚动/重绘、相关测试  
 7. [`docs/06-memory-testing-jank.md`](docs/06-memory-testing-jank.md) — 横切：内存所有权、测试体系与卡顿治理  
-8. [`docs/07-history-structure-entry.md`](docs/07-history-structure-entry.md) — 消息列表结构与 widget 树（打开会话 → 第一帧）  
-9. [`docs/08-history-data-pagination.md`](docs/08-history-data-pagination.md) — 消息数据模型、SparseIds 切片与翻页  
-10. [`docs/09-history-layout-virtualization.md`](docs/09-history-layout-virtualization.md) — 布局虚拟化与滚动锚点  
-11. [`docs/10-history-media-memory.md`](docs/10-history-media-memory.md) — 行内媒体内存、keepAlive、unload  
-12. [`docs/11-history-updates-jank.md`](docs/11-history-updates-jank.md) — 增量更新、动画与对照 Dialogs  
-13. [`docs/history-SERIES.md`](docs/history-SERIES.md) — 消息列表分册索引  
-14. [`SERIES.md`](SERIES.md) — 总目录（已完成表 + 12+ stubs）
+8. [`docs/07-history-structure-entry.md`](docs/07-history-structure-entry.md) — **H1** 消息列表结构与入口（首帧）  
+9. [`docs/08-history-data-pagination.md`](docs/08-history-data-pagination.md) — **H2** 数据模型与分页 / Gap / MTP  
+10. [`docs/09-history-layout-virtualization.md`](docs/09-history-layout-virtualization.md) — **H3** 布局虚拟化与滚动锚点  
+11. [`docs/10-history-media-memory.md`](docs/10-history-media-memory.md) — **H4** 行内媒体与 keepAlive / unload  
+12. [`docs/11-history-updates-jank.md`](docs/11-history-updates-jank.md) — **H5** 更新 / 动画 / 主线程与 Dialogs 对比  
+13. [`SERIES.md`](SERIES.md) — 全系列 TOC（已完成 + stubs 12–24）  
+14. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
 
 ## 资料来源与方法
 
@@ -47,29 +49,24 @@
 - `gh api .../contents/`、`.../releases`、`.../tags`、`.../languages`、`.../commits`、`git/trees?recursive=1`
 - `https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/` 下头/实现与 `.github/workflows`
 - 子模块 raw：`desktop-app/lib_base`、`lib_crl`、`lib_ui`（所有权 / `crl` / `RpWidget`）
-- **未**做全量 `git clone`；路径/模块名来自 Contents API、git tree 与 raw 文件
+- HistoryView（07–11）：对 `Telegram/SourceFiles/history` 与 `data` **浅克隆 + sparse checkout** 核对符号与调用链
+- **未**做全量 `git clone` 整仓；路径/模块名来自 Contents API、git tree、raw 与上述 sparse 树
 
 ## 目录结构（本分析包）
 
 ```
 tdesktop-analysis/
-├── README.md                 # 本文件
-├── SERIES.md                 # 章节规划（已完成 + stubs）
+├── README.md
+├── SERIES.md
 └── docs/
-    ├── 00-why-it-nails-it.md # 导读：为什么实现得牛（推荐首读）
-    ├── 00-overview.md
-    ├── 01-history-timeline.md
-    ├── 02-architecture.md
-    ├── 03-mtproto-networking.md
-    ├── 04-dialogs-chat-list.md
-    ├── 05-dialogs-impl-memory-perf.md
-    ├── 06-memory-testing-jank.md
-    ├── 07-history-structure-entry.md
-    ├── 08-history-data-pagination.md
-    ├── 09-history-layout-virtualization.md
-    ├── 10-history-media-memory.md
-    ├── 11-history-updates-jank.md
-    └── history-SERIES.md     # 消息列表分册索引
+    ├── 00-why-it-nails-it.md          # 导读（推荐首读）
+    ├── 00-overview.md … 06-….md
+    ├── 07-history-structure-entry.md  # H1
+    ├── 08-history-data-pagination.md  # H2
+    ├── 09-history-layout-virtualization.md  # H3
+    ├── 10-history-media-memory.md     # H4
+    ├── 11-history-updates-jank.md     # H5
+    └── history-SERIES.md              # 07–11 短索引
 ```
 
 ## 语言约定

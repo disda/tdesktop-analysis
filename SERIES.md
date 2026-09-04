@@ -2,7 +2,7 @@
 
 > 已完成章节见「已完成」；其余为标题 stubs。
 >
-> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–15 下钻。导读为独立文档，各章正文不再重复置顶块。
+> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–19 下钻。导读为独立文档，各章正文不再重复置顶块。
 >
 > **HistoryView 分集速览**：[docs/history-SERIES.md](docs/history-SERIES.md)
 
@@ -27,21 +27,21 @@
 | 13 | `desktop-app` 子模块图谱：`lib_*` 职责与组装 | [`docs/13-desktop-app-libs.md`](docs/13-desktop-app-libs.md) |
 | 14 | API 层与更新机制：`SourceFiles/api`、`ApiWrap`、PTS/Updates、DC shift | [`docs/14-api-updates.md`](docs/14-api-updates.md) |
 | 15 | UI 体系：`lib_ui`、`RpWidget`、主题与 style codegen | [`docs/15-ui-system.md`](docs/15-ui-system.md) |
+| 16 | 数据与存储：`data` / `lib_storage` / 本地缓存边界与 eviction | [`docs/16-storage-cache.md`](docs/16-storage-cache.md) |
+| 17 | Chat Folders / Filters 深潜：规则、`chatlist` 分享、设置 UI | [`docs/17-chat-folders-deep.md`](docs/17-chat-folders-deep.md) |
+| 18 | 媒体管线：FFmpeg、Lottie、语音/视频消息与编辑器 | [`docs/18-media-pipeline.md`](docs/18-media-pipeline.md) |
+| 19 | 通话与直播：`lib_webrtc`、`tgcalls`、`SourceFiles/calls` | [`docs/19-calls-streaming.md`](docs/19-calls-streaming.md) |
 
 ## 拟定后续（stubs）
 
 | 编号 | 拟定标题 |
 |---:|---|
-| 16 | 数据与存储：`data` / `lib_storage` / 本地缓存边界与 eviction |
-| 17 | Chat Folders / Filters 深潜：规则、`chatlist` 分享、设置 UI |
-| 18 | 媒体管线：FFmpeg、Lottie、语音/视频消息与编辑器 |
-| 19 | 通话与直播：`lib_webrtc`、`tgcalls`、`SourceFiles/calls` |
 | 20 | 平台层：`SourceFiles/platform`（Win / macOS / Linux）差异表 |
 | 21 | 安全相关表面：本地加密、passcode、webauthn/passkeys、代理（含 WEB proxy） |
 | 22 | 打包与分发：Snap / Flatpak / 官方安装包 / 签名与更新通道 |
 | 23 | 贡献与工程实践：Issues、Actions、分支策略（`dev` vs `master`） |
 | 24 | 附录：术语表、API 凭证自建注意、许可证合规检查清单 |
 
-导读「下一步」在 **07–11（HistoryView）** 与 **12–15（构建 / 库 / API / UI）** 完成后，优先 **16（storage eviction）**、**18（媒体管线）**。
+导读「下一步」在 **16–19（存储 / Folders / 媒体 / 通话）** 完成后，优先 **20（平台层）**、**21（安全表面）**。
 
 （完）

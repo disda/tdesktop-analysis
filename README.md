@@ -44,8 +44,12 @@
 14. [`docs/13-desktop-app-libs.md`](docs/13-desktop-app-libs.md) — `lib_*` / codegen / cmake_helpers 图谱与组装  
 15. [`docs/14-api-updates.md`](docs/14-api-updates.md) — `ApiWrap`、`Api::Updates`、PTS、DC shift  
 16. [`docs/15-ui-system.md`](docs/15-ui-system.md) — `lib_ui`、`RpWidget`、主题与 style codegen  
-17. [`SERIES.md`](SERIES.md) — 全系列 TOC（已完成 + stubs 16–24）  
-18. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
+17. [`docs/16-storage-cache.md`](docs/16-storage-cache.md) — `data` / `lib_storage` / 本地缓存与 eviction  
+18. [`docs/17-chat-folders-deep.md`](docs/17-chat-folders-deep.md) — Chat Folders 规则、chatlist 分享、设置 UI  
+19. [`docs/18-media-pipeline.md`](docs/18-media-pipeline.md) — FFmpeg、Lottie、clip 线程、语音/视频与编辑器  
+20. [`docs/19-calls-streaming.md`](docs/19-calls-streaming.md) — `lib_webrtc`、`tgcalls`、群呼/直播/屏幕共享  
+21. [`SERIES.md`](SERIES.md) — 全系列 TOC（已完成 + stubs 20–24）  
+22. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
 
 ## 资料来源与方法
 
@@ -55,6 +59,7 @@
 - 子模块 raw：`desktop-app/lib_base`、`lib_crl`、`lib_ui`、`lib_rpl`、`lib_tl`、`lib_storage`、`codegen`、`cmake_helpers` 等
 - HistoryView（07–11）：对 `Telegram/SourceFiles/history` 与 `data` **浅克隆 + sparse checkout** 核对符号与调用链
 - 12–15：`configure.py` / 根与 `Telegram` CMake、`prepare.py` stage 名、`apiwrap` / `api_updates` / `PtsWaiter` / `core_types` DC 常量、`td_ui.cmake` / `generate_styles` / `window_theme` / `chat_style`
+- 16–19：`lib_storage` Cache::Database / `data_session` cacheBigFile、`data_chat_filters` + `boxes/filters` + `settings_folders`、`media/clip|streaming|audio` + `lib_lottie` + `editor`、`calls` + `lib_webrtc` + `lib_tgcalls` / RTMP
 - **未**做全量 `git clone` 整仓；路径/模块名来自 Contents API、git tree、raw 与上述 sparse 树
 - **未**自行 `git push`；推送目标为 https://github.com/disda/tdesktop-analysis
 
@@ -76,6 +81,10 @@ tdesktop-analysis/
     ├── 13-desktop-app-libs.md         # lib_* 图谱
     ├── 14-api-updates.md              # ApiWrap / Updates / PTS
     ├── 15-ui-system.md                # lib_ui / RpWidget / style
+    ├── 16-storage-cache.md            # data / lib_storage / eviction
+    ├── 17-chat-folders-deep.md        # ChatFilter / chatlist / UI
+    ├── 18-media-pipeline.md           # FFmpeg / Lottie / clip / editor
+    ├── 19-calls-streaming.md          # webrtc / tgcalls / calls
     └── history-SERIES.md              # 07–11 短索引
 ```
 

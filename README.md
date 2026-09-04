@@ -48,8 +48,13 @@
 18. [`docs/17-chat-folders-deep.md`](docs/17-chat-folders-deep.md) — Chat Folders 规则、chatlist 分享、设置 UI  
 19. [`docs/18-media-pipeline.md`](docs/18-media-pipeline.md) — FFmpeg、Lottie、clip 线程、语音/视频与编辑器  
 20. [`docs/19-calls-streaming.md`](docs/19-calls-streaming.md) — `lib_webrtc`、`tgcalls`、群呼/直播/屏幕共享  
-21. [`SERIES.md`](SERIES.md) — 全系列 TOC（已完成 + stubs 20–24）  
-22. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
+21. [`docs/20-platform-layer.md`](docs/20-platform-layer.md) — 平台层 Win / macOS / Linux 差异  
+22. [`docs/21-security-surface.md`](docs/21-security-surface.md) — 本地加密、passcode、passkeys、代理（含 WEB）  
+23. [`docs/22-packaging-distribution.md`](docs/22-packaging-distribution.md) — Snap / Flatpak / 官方包 / 签名与更新  
+24. [`docs/23-engineering-practice.md`](docs/23-engineering-practice.md) — Issues、Actions、`dev` vs `master`  
+25. [`docs/24-appendix.md`](docs/24-appendix.md) — 术语表、API 凭证、许可证合规清单  
+26. [`SERIES.md`](SERIES.md) — 全系列 TOC（00–24 全部完成）  
+27. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
 
 ## 资料来源与方法
 
@@ -60,6 +65,7 @@
 - HistoryView（07–11）：对 `Telegram/SourceFiles/history` 与 `data` **浅克隆 + sparse checkout** 核对符号与调用链
 - 12–15：`configure.py` / 根与 `Telegram` CMake、`prepare.py` stage 名、`apiwrap` / `api_updates` / `PtsWaiter` / `core_types` DC 常量、`td_ui.cmake` / `generate_styles` / `window_theme` / `chat_style`
 - 16–19：`lib_storage` Cache::Database / `data_session` cacheBigFile、`data_chat_filters` + `boxes/filters` + `settings_folders`、`media/clip|streaming|audio` + `lib_lottie` + `editor`、`calls` + `lib_webrtc` + `lib_tgcalls` / RTMP
+- 20–24：`platform/{win,mac,linux}` + `platform_webauthn`、`Storage::Domain` / passkeys / `MTP::ProxyData` + `docs/web-proxy-plan.md`、`snap/snapcraft.yaml` + `sign_update.py` + workflows、`.github/CONTRIBUTING.md` + `master_updater.yml`、`docs/api_credentials.md` + `LEGAL`
 - **未**做全量 `git clone` 整仓；路径/模块名来自 Contents API、git tree、raw 与上述 sparse 树
 - **未**自行 `git push`；推送目标为 https://github.com/disda/tdesktop-analysis
 
@@ -85,6 +91,11 @@ tdesktop-analysis/
     ├── 17-chat-folders-deep.md        # ChatFilter / chatlist / UI
     ├── 18-media-pipeline.md           # FFmpeg / Lottie / clip / editor
     ├── 19-calls-streaming.md          # webrtc / tgcalls / calls
+    ├── 20-platform-layer.md           # Win / macOS / Linux 平台层
+    ├── 21-security-surface.md         # 加密 / passcode / passkeys / 代理
+    ├── 22-packaging-distribution.md   # Snap / Flatpak / 签名 / 更新
+    ├── 23-engineering-practice.md     # Issues / Actions / dev vs master
+    ├── 24-appendix.md                 # 术语 / API 凭证 / 许可证清单
     └── history-SERIES.md              # 07–11 短索引
 ```
 

@@ -1,8 +1,8 @@
 # 系列后续章节
 
-> 已完成章节见「已完成」；其余为标题 stubs。
+> 已完成章节见「已完成」。**拟定后续（stubs）：全部完成。**
 >
-> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–19 下钻。导读为独立文档，各章正文不再重复置顶块。
+> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–24 下钻。导读为独立文档，各章正文不再重复置顶块。
 >
 > **HistoryView 分集速览**：[docs/history-SERIES.md](docs/history-SERIES.md)
 
@@ -31,17 +31,14 @@
 | 17 | Chat Folders / Filters 深潜：规则、`chatlist` 分享、设置 UI | [`docs/17-chat-folders-deep.md`](docs/17-chat-folders-deep.md) |
 | 18 | 媒体管线：FFmpeg、Lottie、语音/视频消息与编辑器 | [`docs/18-media-pipeline.md`](docs/18-media-pipeline.md) |
 | 19 | 通话与直播：`lib_webrtc`、`tgcalls`、`SourceFiles/calls` | [`docs/19-calls-streaming.md`](docs/19-calls-streaming.md) |
+| 20 | 平台层：`SourceFiles/platform`（Win / macOS / Linux）差异表 | [`docs/20-platform-layer.md`](docs/20-platform-layer.md) |
+| 21 | 安全相关表面：本地加密、passcode、webauthn/passkeys、代理（含 WEB proxy） | [`docs/21-security-surface.md`](docs/21-security-surface.md) |
+| 22 | 打包与分发：Snap / Flatpak / 官方安装包 / 签名与更新通道 | [`docs/22-packaging-distribution.md`](docs/22-packaging-distribution.md) |
+| 23 | 贡献与工程实践：Issues、Actions、分支策略（`dev` vs `master`） | [`docs/23-engineering-practice.md`](docs/23-engineering-practice.md) |
+| 24 | 附录：术语表、API 凭证自建注意、许可证合规检查清单 | [`docs/24-appendix.md`](docs/24-appendix.md) |
 
 ## 拟定后续（stubs）
 
-| 编号 | 拟定标题 |
-|---:|---|
-| 20 | 平台层：`SourceFiles/platform`（Win / macOS / Linux）差异表 |
-| 21 | 安全相关表面：本地加密、passcode、webauthn/passkeys、代理（含 WEB proxy） |
-| 22 | 打包与分发：Snap / Flatpak / 官方安装包 / 签名与更新通道 |
-| 23 | 贡献与工程实践：Issues、Actions、分支策略（`dev` vs `master`） |
-| 24 | 附录：术语表、API 凭证自建注意、许可证合规检查清单 |
-
-导读「下一步」在 **16–19（存储 / Folders / 媒体 / 通话）** 完成后，优先 **20（平台层）**、**21（安全表面）**。
+全部完成。
 
 （完）

@@ -23,7 +23,7 @@
 | Stars / Forks | `32825` / `7172`（瞬时值，会变） |
 | 最新已发布 tag（API `releases`） | `v7.1.5`（`2026-09-02T19:49:05Z`） |
 
-> 说明：`dev` 分支上的 `changelog.txt` 可能领先于 GitHub Releases。以 Releases/tag 为准核对「已发布」；changelog 作功能叙述补充。
+> 说明：`dev` 分支上的 `changelog.txt` / `Telegram/build/version` 可能领先于 GitHub Releases。以 Releases/tag 为准核对「已发布」；changelog / version 作功能叙述补充。
 
 ## 推荐阅读顺序
 
@@ -40,17 +40,23 @@
 10. [`docs/09-history-layout-virtualization.md`](docs/09-history-layout-virtualization.md) — **H3** 布局虚拟化与滚动锚点  
 11. [`docs/10-history-media-memory.md`](docs/10-history-media-memory.md) — **H4** 行内媒体与 keepAlive / unload  
 12. [`docs/11-history-updates-jank.md`](docs/11-history-updates-jank.md) — **H5** 更新 / 动画 / 主线程与 Dialogs 对比  
-13. [`SERIES.md`](SERIES.md) — 全系列 TOC（已完成 + stubs 12–24）  
-14. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
+13. [`docs/12-build-system.md`](docs/12-build-system.md) — 构建系统：`configure.py`、cmake_helpers、prepare、version  
+14. [`docs/13-desktop-app-libs.md`](docs/13-desktop-app-libs.md) — `lib_*` / codegen / cmake_helpers 图谱与组装  
+15. [`docs/14-api-updates.md`](docs/14-api-updates.md) — `ApiWrap`、`Api::Updates`、PTS、DC shift  
+16. [`docs/15-ui-system.md`](docs/15-ui-system.md) — `lib_ui`、`RpWidget`、主题与 style codegen  
+17. [`SERIES.md`](SERIES.md) — 全系列 TOC（已完成 + stubs 16–24）  
+18. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
 
 ## 资料来源与方法
 
 - `gh api repos/telegramdesktop/tdesktop`（元数据）
 - `gh api .../contents/`、`.../releases`、`.../tags`、`.../languages`、`.../commits`、`git/trees?recursive=1`
 - `https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/` 下头/实现与 `.github/workflows`
-- 子模块 raw：`desktop-app/lib_base`、`lib_crl`、`lib_ui`（所有权 / `crl` / `RpWidget`）
+- 子模块 raw：`desktop-app/lib_base`、`lib_crl`、`lib_ui`、`lib_rpl`、`lib_tl`、`lib_storage`、`codegen`、`cmake_helpers` 等
 - HistoryView（07–11）：对 `Telegram/SourceFiles/history` 与 `data` **浅克隆 + sparse checkout** 核对符号与调用链
+- 12–15：`configure.py` / 根与 `Telegram` CMake、`prepare.py` stage 名、`apiwrap` / `api_updates` / `PtsWaiter` / `core_types` DC 常量、`td_ui.cmake` / `generate_styles` / `window_theme` / `chat_style`
 - **未**做全量 `git clone` 整仓；路径/模块名来自 Contents API、git tree、raw 与上述 sparse 树
+- **未**自行 `git push`；推送目标为 https://github.com/disda/tdesktop-analysis
 
 ## 目录结构（本分析包）
 
@@ -66,6 +72,10 @@ tdesktop-analysis/
     ├── 09-history-layout-virtualization.md  # H3
     ├── 10-history-media-memory.md     # H4
     ├── 11-history-updates-jank.md     # H5
+    ├── 12-build-system.md             # 构建 / CMake / prepare
+    ├── 13-desktop-app-libs.md         # lib_* 图谱
+    ├── 14-api-updates.md              # ApiWrap / Updates / PTS
+    ├── 15-ui-system.md                # lib_ui / RpWidget / style
     └── history-SERIES.md              # 07–11 短索引
 ```
 

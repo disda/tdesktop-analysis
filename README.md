@@ -8,7 +8,7 @@
 
 用产品约束（超长会话列表、实时 MTProto、跨平台、流体 UI）串起本系列已核实的机制：多 `MainList` 数据面、滚动行缓存与 freeze、Instance/会话线程、TL codegen、自研 `lib_ui`、以及「薄测试 / 厚所有权」的取舍。读完再按章节下钻。
 
-**消息列表分集** → [`docs/history-SERIES.md`](docs/history-SERIES.md)（07–11）
+**消息列表分集** → [`docs/history-SERIES.md`](docs/history-SERIES.md)（07–11；续篇 25–26）
 
 ## 上游
 
@@ -40,21 +40,26 @@
 10. [`docs/09-history-layout-virtualization.md`](docs/09-history-layout-virtualization.md) — **H3** 布局虚拟化与滚动锚点  
 11. [`docs/10-history-media-memory.md`](docs/10-history-media-memory.md) — **H4** 行内媒体与 keepAlive / unload  
 12. [`docs/11-history-updates-jank.md`](docs/11-history-updates-jank.md) — **H5** 更新 / 动画 / 主线程与 Dialogs 对比  
-13. [`docs/12-build-system.md`](docs/12-build-system.md) — 构建系统：`configure.py`、cmake_helpers、prepare、version  
-14. [`docs/13-desktop-app-libs.md`](docs/13-desktop-app-libs.md) — `lib_*` / codegen / cmake_helpers 图谱与组装  
-15. [`docs/14-api-updates.md`](docs/14-api-updates.md) — `ApiWrap`、`Api::Updates`、PTS、DC shift  
-16. [`docs/15-ui-system.md`](docs/15-ui-system.md) — `lib_ui`、`RpWidget`、主题与 style codegen  
-17. [`docs/16-storage-cache.md`](docs/16-storage-cache.md) — `data` / `lib_storage` / 本地缓存与 eviction  
-18. [`docs/17-chat-folders-deep.md`](docs/17-chat-folders-deep.md) — Chat Folders 规则、chatlist 分享、设置 UI  
-19. [`docs/18-media-pipeline.md`](docs/18-media-pipeline.md) — FFmpeg、Lottie、clip 线程、语音/视频与编辑器  
-20. [`docs/19-calls-streaming.md`](docs/19-calls-streaming.md) — `lib_webrtc`、`tgcalls`、群呼/直播/屏幕共享  
-21. [`docs/20-platform-layer.md`](docs/20-platform-layer.md) — 平台层 Win / macOS / Linux 差异  
-22. [`docs/21-security-surface.md`](docs/21-security-surface.md) — 本地加密、passcode、passkeys、代理（含 WEB）  
-23. [`docs/22-packaging-distribution.md`](docs/22-packaging-distribution.md) — Snap / Flatpak / 官方包 / 签名与更新  
-24. [`docs/23-engineering-practice.md`](docs/23-engineering-practice.md) — Issues、Actions、`dev` vs `master`  
-25. [`docs/24-appendix.md`](docs/24-appendix.md) — 术语表、API 凭证、许可证合规清单  
-26. [`SERIES.md`](SERIES.md) — 全系列 TOC（00–24 全部完成）  
-27. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引  
+13. [`docs/25-history-dual-hosts.md`](docs/25-history-dual-hosts.md) — **Gap** 双宿主：HistoryWidget vs ChatWidget / Element 所有权  
+14. [`docs/26-compose-send-path.md`](docs/26-compose-send-path.md) — **Gap** Compose / 草稿 / 发送动画 / local→server id  
+15. [`docs/12-build-system.md`](docs/12-build-system.md) — 构建系统：`configure.py`、cmake_helpers、prepare、version  
+16. [`docs/13-desktop-app-libs.md`](docs/13-desktop-app-libs.md) — `lib_*` / codegen / cmake_helpers 图谱与组装  
+17. [`docs/14-api-updates.md`](docs/14-api-updates.md) — `ApiWrap`、`Api::Updates`、PTS、DC shift  
+18. [`docs/29-updates-difference-deep.md`](docs/29-updates-difference-deep.md) — **Gap** getDifference / 频道差量 / range / 列表跳变与 History gap  
+19. [`docs/15-ui-system.md`](docs/15-ui-system.md) — `lib_ui`、`RpWidget`、主题与 style codegen  
+20. [`docs/16-storage-cache.md`](docs/16-storage-cache.md) — `data` / `lib_storage` / 本地缓存与 eviction  
+21. [`docs/27-multi-account-domain.md`](docs/27-multi-account-domain.md) — **Gap** Domain / Account、本地密钥、切换与拆栈  
+22. [`docs/28-in-app-search.md`](docs/28-in-app-search.md) — **Gap** 全局/会话内搜索、FakeRow、服务端 vs 本地（链 04）  
+23. [`docs/17-chat-folders-deep.md`](docs/17-chat-folders-deep.md) — Chat Folders 规则、chatlist 分享、设置 UI  
+24. [`docs/18-media-pipeline.md`](docs/18-media-pipeline.md) — FFmpeg、Lottie、clip 线程、语音/视频与编辑器  
+25. [`docs/19-calls-streaming.md`](docs/19-calls-streaming.md) — `lib_webrtc`、`tgcalls`、群呼/直播/屏幕共享  
+26. [`docs/20-platform-layer.md`](docs/20-platform-layer.md) — 平台层 Win / macOS / Linux 差异  
+27. [`docs/21-security-surface.md`](docs/21-security-surface.md) — 本地加密、passcode、passkeys、代理（含 WEB）  
+28. [`docs/22-packaging-distribution.md`](docs/22-packaging-distribution.md) — Snap / Flatpak / 官方包 / 签名与更新  
+29. [`docs/23-engineering-practice.md`](docs/23-engineering-practice.md) — Issues、Actions、`dev` vs `master`  
+30. [`docs/24-appendix.md`](docs/24-appendix.md) — 术语表、API 凭证、许可证合规清单  
+31. [`SERIES.md`](SERIES.md) — 全系列 TOC（00–29；含 gap-fill 25–29）  
+32. [`docs/history-SERIES.md`](docs/history-SERIES.md) — HistoryView 五集短索引（+ 链 25–26）  
 
 ## 资料来源与方法
 
@@ -66,6 +71,7 @@
 - 12–15：`configure.py` / 根与 `Telegram` CMake、`prepare.py` stage 名、`apiwrap` / `api_updates` / `PtsWaiter` / `core_types` DC 常量、`td_ui.cmake` / `generate_styles` / `window_theme` / `chat_style`
 - 16–19：`lib_storage` Cache::Database / `data_session` cacheBigFile、`data_chat_filters` + `boxes/filters` + `settings_folders`、`media/clip|streaming|audio` + `lib_lottie` + `editor`、`calls` + `lib_webrtc` + `lib_tgcalls` / RTMP
 - 20–24：`platform/{win,mac,linux}` + `platform_webauthn`、`Storage::Domain` / passkeys / `MTP::ProxyData` + `docs/web-proxy-plan.md`、`snap/snapcraft.yaml` + `sign_update.py` + workflows、`.github/CONTRIBUTING.md` + `master_updater.yml`、`docs/api_credentials.md` + `LEGAL`
+- 25–29（gap-fill）：`history_view_chat_section` / `list_widget`、`compose_controls` / `data_drafts` / `data_histories`、`main_domain` / `main_account` / `storage_domain`、`FakeRow` / `api_messages_search*` / `compose_search`、`api_updates` difference 实现
 - **未**做全量 `git clone` 整仓；路径/模块名来自 Contents API、git tree、raw 与上述 sparse 树
 - **未**自行 `git push`；推送目标为 https://github.com/disda/tdesktop-analysis
 
@@ -96,7 +102,12 @@ tdesktop-analysis/
     ├── 22-packaging-distribution.md   # Snap / Flatpak / 签名 / 更新
     ├── 23-engineering-practice.md     # Issues / Actions / dev vs master
     ├── 24-appendix.md                 # 术语 / API 凭证 / 许可证清单
-    └── history-SERIES.md              # 07–11 短索引
+    ├── 25-history-dual-hosts.md       # Gap: 双宿主
+    ├── 26-compose-send-path.md        # Gap: 发送路径
+    ├── 27-multi-account-domain.md     # Gap: 多账号 Domain
+    ├── 28-in-app-search.md            # Gap: 应用内搜索
+    ├── 29-updates-difference-deep.md  # Gap: Difference 深潜
+    └── history-SERIES.md              # 07–11 短索引（+25–26）
 ```
 
 ## 语言约定

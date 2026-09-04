@@ -117,10 +117,12 @@
 
 ## 接下来挖哪里
 
-1. **`HistoryView` / 打开会话后的消息流** — `HistoryWidget` / `HistoryView::ListWidget` 是否复用 `RowsScrollCache` 或另一套虚拟化；与 dialogs 行缓存如何分工（[`SERIES.md`](../SERIES.md) stub 12；[`06`](06-memory-testing-jank.md) §E.2）。
-2. **存储驱逐** — `lib_storage` / `Storage::Cache::Database` 的上限与 eviction；`_photosScheduledForCacheClear`、`_heavyViewParts` 与 UI `keepAlive` 的配合（stub「数据与存储」；[`06`](06-memory-testing-jank.md) §E.1）。
-3. **Updates / PTS** — `Api::Updates::feedUpdate*` 全分支如何打到 dialog 顶栏与未读（stub 09；[`03`](03-mtproto-networking.md)、[`04`](04-dialogs-chat-list.md) 已留钩子）。
-4. **媒体全管线** — FFmpeg / Lottie / 相册大图卸载是否与 Clip 三缓冲同一哲学（stub 14）。
+> 初轮 07–11 / 12–24 已落地；**gap-fill 25–29** 补了双宿主、发送路径、多账号、搜索、Difference 深潜。下列为仍可继续挖的点。
+
+1. **`HistoryView` 双宿主与发送** — 总图见 [`25`](25-history-dual-hosts.md) / [`26`](26-compose-send-path.md)；与 Dialogs `RowsScrollCache` 对照仍见 [`09`](09-history-layout-virtualization.md)、[`11`](11-history-updates-jank.md)。
+2. **存储驱逐** — 见 [`16`](16-storage-cache.md)；`_heavyViewParts` 与 UI `keepAlive` 边界可再量化。
+3. **Updates / Difference** — 总述 [`14`](14-api-updates.md)；差量/TooLong/range 见 [`29`](29-updates-difference-deep.md)；`feedUpdate` 全分支仍可逐 TL 展开。
+4. **媒体全管线** — 见 [`18`](18-media-pipeline.md)；相册大图卸载与 Clip 三缓冲是否同哲学可再对照。
 
 ---
 

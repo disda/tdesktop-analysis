@@ -1,8 +1,8 @@
 # 系列后续章节
 
-> 已完成章节见「已完成」。**拟定后续（stubs）：全部完成。**
+> 已完成章节见「已完成」。**拟定后续（stubs）：全部完成。**（含 gap-fill wave：25–29）
 >
-> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–24 下钻。导读为独立文档，各章正文不再重复置顶块。
+> **推荐首读**：[为什么实现得牛（导读）](docs/00-why-it-nails-it.md) — 再按 00–29 下钻。导读为独立文档，各章正文不再重复置顶块。
 >
 > **HistoryView 分集速览**：[docs/history-SERIES.md](docs/history-SERIES.md)
 
@@ -36,9 +36,14 @@
 | 22 | 打包与分发：Snap / Flatpak / 官方安装包 / 签名与更新通道 | [`docs/22-packaging-distribution.md`](docs/22-packaging-distribution.md) |
 | 23 | 贡献与工程实践：Issues、Actions、分支策略（`dev` vs `master`） | [`docs/23-engineering-practice.md`](docs/23-engineering-practice.md) |
 | 24 | 附录：术语表、API 凭证自建注意、许可证合规检查清单 | [`docs/24-appendix.md`](docs/24-appendix.md) |
+| 25 | **Gap-fill** · 双宿主：HistoryWidget/Inner vs ChatWidget/ListWidget | [`docs/25-history-dual-hosts.md`](docs/25-history-dual-hosts.md) |
+| 26 | **Gap-fill** · 发送路径：Compose、草稿、动画、local→server id | [`docs/26-compose-send-path.md`](docs/26-compose-send-path.md) |
+| 27 | **Gap-fill** · 多账号：Domain / Account、本地密钥、切换拆栈 | [`docs/27-multi-account-domain.md`](docs/27-multi-account-domain.md) |
+| 28 | **Gap-fill** · 应用内搜索：全局 / 会话内、FakeRow、服务端 vs 本地 | [`docs/28-in-app-search.md`](docs/28-in-app-search.md) |
+| 29 | **Gap-fill** · Updates Difference 深潜：getDifference / 频道 / range | [`docs/29-updates-difference-deep.md`](docs/29-updates-difference-deep.md) |
 
 ## 拟定后续（stubs）
 
-全部完成。
+全部完成。（00–24 初轮 + 25–29 gap-fill wave）
 
 （完）

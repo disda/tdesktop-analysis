@@ -23,13 +23,14 @@
 2. [`docs/01-history-timeline.md`](docs/01-history-timeline.md) — 可核验的时间线与大版本里程碑  
 3. [`docs/02-architecture.md`](docs/02-architecture.md) — 顶层目录、子模块与设计原则  
 4. [`docs/03-mtproto-networking.md`](docs/03-mtproto-networking.md) — MTProto、会话/连接、TL scheme 与 codegen  
-5. [`SERIES.md`](SERIES.md) — 后续拟写章节标题（含已完成表）
+5. [`docs/04-dialogs-chat-list.md`](docs/04-dialogs-chat-list.md) — 会话列表（Dialogs / Chat List）UI 与数据路径  
+6. [`SERIES.md`](SERIES.md) — 后续拟写章节标题（含已完成表）
 
 ## 资料来源与方法
 
 - `gh api repos/telegramdesktop/tdesktop`（元数据）
 - `gh api .../contents/`、`.../releases`、`.../tags`、`.../languages`、`.../commits`
-- `https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/` 下 `README.md`、`LEGAL`、`CMakeLists.txt`、`.gitmodules`、`changelog.txt`
+- `https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/` 下 `README.md`、`LEGAL`、`CMakeLists.txt`、`.gitmodules`、`changelog.txt`，以及 `Telegram/SourceFiles/**` 头文件 / 部分实现
 - **未**做全量 `git clone`；路径/模块名来自 Contents API 与 raw 文件，非本地完整树遍历
 
 ## 目录结构（本分析包）
@@ -42,7 +43,8 @@ tdesktop-analysis/
     ├── 00-overview.md
     ├── 01-history-timeline.md
     ├── 02-architecture.md
-    └── 03-mtproto-networking.md
+    ├── 03-mtproto-networking.md
+    └── 04-dialogs-chat-list.md
 ```
 
 ## 语言约定

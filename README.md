@@ -24,14 +24,17 @@
 3. [`docs/02-architecture.md`](docs/02-architecture.md) — 顶层目录、子模块与设计原则  
 4. [`docs/03-mtproto-networking.md`](docs/03-mtproto-networking.md) — MTProto、会话/连接、TL scheme 与 codegen  
 5. [`docs/04-dialogs-chat-list.md`](docs/04-dialogs-chat-list.md) — 会话列表（Dialogs / Chat List）UI 与数据路径  
-6. [`SERIES.md`](SERIES.md) — 后续拟写章节标题（含已完成表）
+6. [`docs/05-dialogs-impl-memory-perf.md`](docs/05-dialogs-impl-memory-perf.md) — Dialogs 深潜：实现、内存、滚动/重绘、相关测试  
+7. [`docs/06-memory-testing-jank.md`](docs/06-memory-testing-jank.md) — 横切：内存所有权、测试体系与卡顿治理  
+8. [`SERIES.md`](SERIES.md) — 后续拟写章节标题（含已完成表）
 
 ## 资料来源与方法
 
 - `gh api repos/telegramdesktop/tdesktop`（元数据）
-- `gh api .../contents/`、`.../releases`、`.../tags`、`.../languages`、`.../commits`
-- `https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/` 下 `README.md`、`LEGAL`、`CMakeLists.txt`、`.gitmodules`、`changelog.txt`，以及 `Telegram/SourceFiles/**` 头文件 / 部分实现
-- **未**做全量 `git clone`；路径/模块名来自 Contents API 与 raw 文件，非本地完整树遍历
+- `gh api .../contents/`、`.../releases`、`.../tags`、`.../languages`、`.../commits`、`git/trees?recursive=1`
+- `https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/` 下头/实现与 `.github/workflows`
+- 子模块 raw：`desktop-app/lib_base`、`lib_crl`、`lib_ui`（所有权 / `crl` / `RpWidget`）
+- **未**做全量 `git clone`；路径/模块名来自 Contents API、git tree 与 raw 文件
 
 ## 目录结构（本分析包）
 
@@ -44,7 +47,9 @@ tdesktop-analysis/
     ├── 01-history-timeline.md
     ├── 02-architecture.md
     ├── 03-mtproto-networking.md
-    └── 04-dialogs-chat-list.md
+    ├── 04-dialogs-chat-list.md
+    ├── 05-dialogs-impl-memory-perf.md
+    └── 06-memory-testing-jank.md
 ```
 
 ## 语言约定

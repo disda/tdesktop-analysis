@@ -219,6 +219,11 @@ Dialogs::InnerWidget 订阅变更 → refresh / repaintDialogRow / 滚动调整
 
 会话列表不是单一 `QListView`，而是 **数据侧多 `MainList`（主列表 / 归档 / 每 Filter 一份）+ Entry 多态行**，由 **`Dialogs::InnerWidget` 动态切换 `_shownList`** 绘制；置顶与日期（及可选「未读置顶」）合成 `uint64` 排序键；Chat Folders 自 TL `MTPDialogFilter` 落入 `Data::ChatFilters`，并与 `Window::FiltersMenu` / `activeChatsFilter` 联动。网络侧以 `ApiWrap` 拉 dialogs、`Api::Updates` 推增量、`Session::applyDialog*` 写模型，再经 `entryUpdated` 驱动重绘。
 
+## 深潜续篇
+
+实现级绘制 / 滚动缓存 / 列表 freeze / 行所有权 / 相关测试面 → [`05-dialogs-impl-memory-perf.md`](05-dialogs-impl-memory-perf.md)。  
+仓库级内存、测试体系与卡顿治理 → [`06-memory-testing-jank.md`](06-memory-testing-jank.md)。
+
 ## 本文未覆盖（建议后续）
 
 - `HistoryWidget` / `history_inner_widget` 消息流与打开会话后的同步  
